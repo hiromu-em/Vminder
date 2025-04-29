@@ -1,0 +1,9 @@
+.vercel
+.vscode
+vendor
+.env
+channelCollection.php
+.vercelignore
+*.pem
+composer.lock
+favicon.ico

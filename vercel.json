@@ -1,0 +1,39 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+    "regions": ["hnd1"],
+    "functions": {
+      "api/**/*.php": {
+        "runtime": "vercel-php@0.7.3"
+      }
+    },
+    "redirects": [
+      {"source":"/get-oauth-token","destination":"/api/get_oauth_token.php"},
+      {"source":"/register-error","destination":"/api/login.php"},
+      {"source":"/login", "destination":"/api/login.php"},
+      {"source":"/logout", "destination":"/api/logout.php"},
+      {"source":"/register", "destination":"/api/register.php"},
+      {"source":"/sending-failure", "destination":"/api/error/sending-failure.html"},
+      {"source":"/sending-verify", "destination":"/api/certification/sending-verify.html"},
+      {
+        "source":"/authenticating",
+        "has":[
+          {
+            "type":"query",
+            "key":"token"
+          }
+        ],   
+        "destination":"/api/setPassword.php"
+      },
+      {"source":"/authentication-failure", "destination":"/api/error/authentication-failure.html"},
+      {"source":"/timeover", "destination":"/api/error/timeover.html"},
+      {"source":"/connection-failure","destination":"/api/error/connection-failure.html"},
+      {"source":"/dashboard", "destination":"/api/dashboard/reminderManagement.php"},
+      {"source":"/signup", "destination":"/api/dashboard/reminderManagement.php"},
+      {"source":"/reminder", "destination":"/api/reminder/send.php"},
+      {"source":"/oauth-certification-failure", "destination":"/api/error/oauth-certification-failure.html"}
+    ],
+    "rewrites": [
+      {"source": "/oauth-signup", "destination": "https://vminde.vercel.app/api/certification/oauthCertification.php"}
+    ],
+      "cleanUrls": true
+}
