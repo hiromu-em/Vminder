@@ -107,10 +107,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <p>メール認証完了！</p>
-        <p>半角英数字記号で8文字以上のパスワードを入力してください</p>
         <form method="post">
-            <label>パスワード：</label>
-            <input type="password" name="password" placeholder="半角英数字記号で8文字以上" required autocomplete="off">
+            <label for="password">パスワード：</label>
+            <input type="password" id="password" name="password" placeholder="半角英数字記号で8文字以上" required autocomplete="off">
             <button type="submit">登録</button>
         </form>
         <?php if (!empty($errors)): ?>

@@ -52,6 +52,8 @@ input[type="password"] {
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
+    appearance: none;
+    outline: none;
 }
 
 button[type="submit"] {
@@ -63,6 +65,7 @@ button[type="submit"] {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 19px;
+    margin-top: 17px;
 }
 
 button[type="submit"]:hover {
