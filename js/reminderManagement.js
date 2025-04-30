@@ -17,6 +17,8 @@ const errorContainer = document.querySelector('.error-message-container');
 const memberSearch = document.querySelector('.member-search');
 const registrationComplete = document.querySelector('.registration-complete-container');
 
+let scrollEventFlag = false; 
+
 const sideObject = new sidePanel.ReminderPanel();
 const slidebarMediaQuery = window.matchMedia(SLIDEBAR_BREAKPOINT);
 const pullDownMediaQuery = window.matchMedia(PULLDOWN_BREAKPOINT);
@@ -44,6 +46,8 @@ document.body.addEventListener('click', (e) => {
 });
 
 function scrollEvent(e) {
+
+    scrollEventFlag = true; 
 
     if (e.target.className === 'pull-down-list') {
         const selectedValue = e.target.value;
@@ -112,6 +116,10 @@ function scrollEvent(e) {
 
         };
     }
+
+    setTimeout(() => {
+        scrollEventFlag = false; 
+    }, 0);
 }
 
 /**
@@ -222,6 +230,8 @@ if (mainContentWrapper) {
 }
 
 window.addEventListener('scroll', () => {
+
+    if(scrollEventFlag) return;
 
     const scrollPosition = window.scrollY;
 
