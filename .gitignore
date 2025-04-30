@@ -6,4 +6,3 @@ channelCollection.php
 .vercelignore
 *.pem
 composer.lock
-favicon.ico
