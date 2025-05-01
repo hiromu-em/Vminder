@@ -17,8 +17,6 @@ const errorContainer = document.querySelector('.error-message-container');
 const memberSearch = document.querySelector('.member-search');
 const registrationComplete = document.querySelector('.registration-complete-container');
 
-let scrollEventFlag = false; 
-
 const sideObject = new sidePanel.ReminderPanel();
 const slidebarMediaQuery = window.matchMedia(SLIDEBAR_BREAKPOINT);
 const pullDownMediaQuery = window.matchMedia(PULLDOWN_BREAKPOINT);
@@ -47,36 +45,34 @@ document.body.addEventListener('click', (e) => {
 
 function scrollEvent(e) {
 
-    scrollEventFlag = true; 
-
     if (e.target.className === 'pull-down-list') {
         const selectedValue = e.target.value;
 
         switch (selectedValue) {
             case 'hololive':
                 window.scrollTo({
-                    top: groupTitle.item(0).offsetTop - 75,
+                    top: groupTitle.item(0).offsetTop - 145,
                     behavior: 'instant'
                 });
                 break;
 
             case 'holostars':
                 window.scrollTo({
-                    top: groupTitle.item(1).offsetTop - 75,
+                    top: groupTitle.item(1).offsetTop - 145,
                     behavior: 'instant'
                 });
                 break;
 
             case 'nizisanzi':
                 window.scrollTo({
-                    top: groupTitle.item(2).offsetTop - 75,
+                    top: groupTitle.item(2).offsetTop - 145,
                     behavior: 'instant'
                 });
                 break;
 
             case 'vspo':
                 window.scrollTo({
-                    top: groupTitle.item(3).offsetTop - 75,
+                    top: groupTitle.item(3).offsetTop - 145,
                     behavior: 'instant'
                 });
                 break;
@@ -116,10 +112,6 @@ function scrollEvent(e) {
 
         };
     }
-
-    setTimeout(() => {
-        scrollEventFlag = false; 
-    }, 0);
 }
 
 /**
@@ -231,21 +223,20 @@ if (mainContentWrapper) {
 
 window.addEventListener('scroll', () => {
 
-    if(scrollEventFlag) return;
-
     const scrollPosition = window.scrollY;
 
-    if (scrollPosition > 120) {
+    if (document.querySelector('.pull-down-list') !== null) {
+        if (scrollPosition > document.querySelector('.pull-down-list').offsetTop - 30) {
 
-        memberSearch.style.position = 'fixed';
-        memberSearch.style.top = '115px';
-        memberSearch.style.margin = '0';
-        searchBox.style.boxShadow = "0 0 0px 0.2em rgba(13, 110, 253, 0.6)";
+            memberSearch.style.top = '115px';
+            memberSearch.style.margin = '0';
+            searchBox.style.boxShadow = "0 0 0 2px rgba(13, 110, 253, 0.6)";
 
-    } else {
+        } else {
 
-        memberSearch.style = '';
-        searchBox.style = '';
+            memberSearch.style = '';
+            searchBox.style = '';
+        }
     }
 });
 
@@ -291,6 +282,11 @@ resetButton.addEventListener('click', () => {
     }
 });
 
+window.matchMedia(PULLDOWN_BREAKPOINT).addEventListener('change', () => {
+    memberSearch.style = '';
+    searchBox.style = '';
+});
+
 
 if (errorContainer) {
     setTimeout(() => {
@@ -300,7 +296,7 @@ if (errorContainer) {
     }, 2200);
 }
 
-if(registrationComplete){
+if (registrationComplete) {
     setTimeout(() => {
         registrationComplete.style.transition = 'opacity 0.5s ease-out';
         registrationComplete.style.opacity = '0';
