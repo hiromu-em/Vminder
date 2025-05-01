@@ -505,7 +505,7 @@ header a {
     }
 
     .member-card {
-        width: calc(36.33% - 14px);
+        width: calc(32.33% - 14px);
     }
 
     /* サイドバー */
@@ -622,7 +622,12 @@ header a {
     }
 
     .member-search {
-        margin: 55px 0 28px 0;
+        position: fixed;
+        top: 195px;
+    }
+
+    .main-content-wrapper form{
+        margin-top: 100px;
     }
 
     .member-card {
