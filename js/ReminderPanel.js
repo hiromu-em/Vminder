@@ -1,6 +1,6 @@
 export class ReminderPanel {
     constructor() {
-        this.removeButtons = null;
+        this.memberRemoveButtons = null;
         this.slidebarContainer = null;
         this.slideOpenButton = null;
         this.slidebarList = null;
@@ -34,10 +34,20 @@ export class ReminderPanel {
         const slidebarContainer = document.createElement('div');
         slidebarContainer.className = 'slidebar-container';
 
+        const slidebarButtonContainer = document.createElement('div');
+        slidebarButtonContainer.className = 'slidebar-button-container';
+
         const registerButton = document.createElement('button');
         registerButton.className = 'register-button';
         registerButton.setAttribute('form', 'reminder-select');
         registerButton.textContent = '登録';
+
+        const resetButton = document.createElement('button');
+        resetButton.className = 'reset-button';
+        resetButton.textContent = '全て解除';
+
+        slidebarButtonContainer.appendChild(registerButton);
+        slidebarButtonContainer.appendChild(resetButton);
 
         const openButton = document.createElement('button');
         openButton.className = 'slide-open-button';
@@ -50,8 +60,8 @@ export class ReminderPanel {
         slidebarList.className = 'slidebar-list';
 
         slidebarContainer.appendChild(slidebar);
-        slidebarContainer.appendChild(registerButton);
         slidebar.appendChild(slidebarList);
+        slidebarContainer.appendChild(slidebarButtonContainer);
 
         const mainContentWrapper = document.querySelector('.main-content-wrapper');
         if (mainContentWrapper) {
@@ -68,12 +78,15 @@ export class ReminderPanel {
 
         // 開くボタンのイベントリスナーを設定
         this.addSlidebarEventListeners();
-
+        
         // スライドバーが作成されたら、現在のチェック状態を反映
         const checkboxes = document.querySelectorAll('.member-card input[type="checkbox"]');
         this.updatePanel(checkboxes, this.mediaQuery);
+        
+        // リセットボタンのイベントリスナーを設定
+        this.allResetButtonEvent(checkboxes);
 
-        this.removeButtons = Array.from(document.querySelectorAll('.remove-button'));
+        this.memberRemoveButtons = Array.from(document.querySelectorAll('.remove-button'));
     }
 
     /**
@@ -114,8 +127,30 @@ export class ReminderPanel {
             container: this.slidebarContainer,
             openButton: this.slideOpenButton,
             list: this.slidebarList,
-            removeButtons: this.removeButtons
+            removeButtons: this.memberRemoveButtons
         };
+    }
+
+    /**
+     * リマインダー登録を全て解除
+     */
+    allResetButtonEvent(checkboxes) {
+        const resetButton = document.querySelector('.reset-button');
+
+        resetButton.addEventListener('click', () => {
+
+            let changed = false;
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    checkbox.checked = false;
+                    changed = true;
+                }
+            });
+        
+            if (changed) {
+                this.updatePanel(checkboxes, this.mediaQuery);
+            }
+        });
     }
 
     /**
