@@ -34,6 +34,11 @@ export class ReminderPanel {
         const slidebarContainer = document.createElement('div');
         slidebarContainer.className = 'slidebar-container';
 
+        const registerButton = document.createElement('button');
+        registerButton.className = 'register-button';
+        registerButton.setAttribute('form', 'reminder-select');
+        registerButton.textContent = '登録';
+
         const openButton = document.createElement('button');
         openButton.className = 'slide-open-button';
         openButton.textContent = '登録一覧';
@@ -45,6 +50,7 @@ export class ReminderPanel {
         slidebarList.className = 'slidebar-list';
 
         slidebarContainer.appendChild(slidebar);
+        slidebarContainer.appendChild(registerButton);
         slidebar.appendChild(slidebarList);
 
         const mainContentWrapper = document.querySelector('.main-content-wrapper');
