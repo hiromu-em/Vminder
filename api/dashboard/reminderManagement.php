@@ -242,7 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <ul id="sidebar-list"></ul>
                 </div>
                 <div class="submit-button-container">
-                    <button type="submit" form="reminder-select">登録する</button>
+                    <button type="submit" form="reminder-select">登録</button>
                 </div>
                 <div class="reset-button-container">
                     <button type="button" id="reset-all-button" form="reminder-select">全て解除</button>
