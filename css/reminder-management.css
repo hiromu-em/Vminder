@@ -109,7 +109,7 @@ header a {
 .dashboard-container {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 13px;
+    gap: 10px;
     justify-content: center;
     width: 100%;
 }
@@ -281,10 +281,9 @@ header a {
     width: calc(20% - 5px);
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 2px 1px #27C7FF;
-    transition: transform 0.3s ease, box-shadow 0.4s ease;
+    box-shadow: 0 0 2px #27C7FF;
+    transition: transform 0.3s ease;
     position: relative;
-    overflow: hidden;
     box-sizing: border-box;
     cursor: pointer;
     display: flex;
@@ -298,7 +297,6 @@ header a {
 
 .member-card:hover {
     transform: translateY(-13px);
-    box-shadow: 0 3px 10px #27C7FF;
 }
 
 .member-card .img-container {
@@ -323,20 +321,36 @@ header a {
     color: #333;
 }
 
-.member-card input[type="checkbox"]:checked~.member-name-hololive {
-    color: #27C7FF;
+.member-card:has(input[type="checkbox"]:checked~.member-name-hololive) {
+    box-shadow: 0px 0px 3px 1px #27C7FF;
+
+    .member-name-hololive {
+        color: #27C7FF;
+    }
 }
 
-.member-card input[type="checkbox"]:checked~.member-name-holostars {
-    color: #002AD9;
+.member-card:has(input[type="checkbox"]:checked~.member-name-holostars) {
+    box-shadow: 0px 0px 3px 1px #002AD9;
+
+    .member-name-holostars {
+        color: #002AD9;
+    }
 }
 
-.member-card input[type="checkbox"]:checked~.member-name-nizisanzi {
-    color: #2A4B71;
+.member-card:has(input[type="checkbox"]:checked~.member-name-nizisanzi) {
+    box-shadow: 0px 0px 3px 1px #2A4B71;
+
+    .member-name-nizisanzi {
+        color: #2A4B71;
+    }
 }
 
-.member-card input[type="checkbox"]:checked~.member-name-vspo {
-    color: #ff6ea2;
+.member-card:has(input[type="checkbox"]:checked~.member-name-vspo) {
+    box-shadow: 0px 0px 3px 1px #ff6ea2;
+
+    .member-name-vspo {
+        color: #ff6ea2;
+    }
 }
 
 .member-card input[type="checkbox"] {
@@ -529,7 +543,6 @@ header a {
         flex-direction: column;
         padding-top: 10px;
         z-index: 10;
-        row-gap: 16px;
     }
 
     .slidebar-button-container {
@@ -546,7 +559,6 @@ header a {
         scrollbar-width: thin;
         height: 330px;
     }
-
 
     .slidebar-list {
         margin: 0;
@@ -636,7 +648,7 @@ header a {
         display: none;
     }
 
-    .slidebar-container{
+    .slidebar-container {
         top: 170px;
     }
 
