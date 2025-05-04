@@ -43,19 +43,19 @@ try {
     $allMembers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $hololiveMembers = array_filter($allMembers, function ($member) {
-        return $member['group'] == 'ホロライブ';
+        return $member['member_group'] == 'ホロライブ';
     });
 
     $holostarsMembers = array_filter($allMembers, function ($member) {
-        return $member['group'] == 'ホロスターズ';
+        return $member['member_group'] == 'ホロスターズ';
     });
 
     $nizisanziMembers = array_filter($allMembers, function ($member) {
-        return $member['group'] == 'にじさんじ';
+        return $member['member_group'] == 'にじさんじ';
     });
 
     $vspoMembers = array_filter($allMembers, function ($member) {
-        return $member['group'] == 'ぶいすぽっ！';
+        return $member['member_group'] == 'ぶいすぽっ！';
     });
 
 } catch (PDOException $e) {
@@ -170,15 +170,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php
                             $isChecked = in_array($hololiveMember['id'], $registeredMembers);
                             ?>
-                            <span class="group-name"><?php echo $hololiveMember['group']; ?></span>
+                            <span class="group-name"><?php echo $hololiveMember['member_group']; ?></span>
                             <input type="checkbox" name="selected_members[]" value="<?php echo $hololiveMember['id']; ?>"
                                 <?php echo $isChecked ? 'checked' : ''; ?>>
                             <div class="img-container">
                                 <img src="<?php echo $hololiveMember['img_url']; ?> "
                                     alt="<?php echo $hololiveMember['channel_name']; ?>" draggable="false">
                             </div>
-                            <span class="member-name-hololive"
-                                data-kana="<?php echo $hololiveMember['channel_name_kana']; ?>"><?php echo $hololiveMember['channel_name']; ?></span>
+                            <span class="member-name-hololive"data-kana="<?php echo $hololiveMember['channel_name_kana']; ?>">
+                                <?php echo $hololiveMember['channel_name']; ?>
+                            </span>
+                            <span class="member-name-kana">
+                                <?php echo $hololiveMember['channel_name_kana']; ?>
+                            </span>
                         </label>
                     <?php endforeach ?>
                     <h3 class="group-title">ホロスターズ</h3>
@@ -187,15 +191,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php
                             $isChecked = in_array($holostarsMember['id'], $registeredMembers);
                             ?>
-                            <span class="group-name"><?php echo $holostarsMember['group']; ?></span>
+                            <span class="group-name"><?php echo $holostarsMember['member_group']; ?></span>
                             <input type="checkbox" name="selected_members[]" value="<?php echo $holostarsMember['id']; ?>"
                                 <?php echo $isChecked ? 'checked' : ''; ?>>
                             <div class="img-container">
                                 <img src="<?php echo $holostarsMember['img_url']; ?> "
                                     alt="<?php echo $holostarsMember['channel_name']; ?>" draggable="false">
                             </div>
-                            <span class="member-name-holostars"
-                                data-kana="<?php echo $holostarsMember['channel_name_kana']; ?>"><?php echo $holostarsMember['channel_name']; ?></span>
+                            <span class="member-name-holostars"data-kana="<?php echo $holostarsMember['channel_name_kana']; ?>">
+                                <?php echo $holostarsMember['channel_name']; ?>
+                            </span>
+                            <span class="member-name-kana">
+                                <?php echo $holostarsMember['channel_name_kana']; ?>
+                            </span>
                         </label>
                     <?php endforeach ?>
                 </div>
@@ -206,15 +214,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php
                             $isChecked = in_array($nizisanziMember['id'], $registeredMembers);
                             ?>
-                            <span class="group-name"><?php echo $nizisanziMember['group']; ?></span>
+                            <span class="group-name"><?php echo $nizisanziMember['member_group']; ?></span>
                             <input type="checkbox" name="selected_members[]" value="<?php echo $nizisanziMember['id']; ?>"
                                 <?php echo $isChecked ? 'checked' : ''; ?>>
                             <div class="img-container">
                                 <img src="<?php echo $nizisanziMember['img_url']; ?> "
                                     alt="<?php echo $nizisanziMember['channel_name']; ?>" draggable="false">
                             </div>
-                            <span class="member-name-nizisanzi"
-                                data-kana="<?php echo $nizisanziMember['channel_name_kana']; ?>"><?php echo $nizisanziMember['channel_name']; ?></span>
+                            <span class="member-name-nizisanzi"data-kana="<?php echo $nizisanziMember['channel_name_kana']; ?>">
+                                <?php echo $nizisanziMember['channel_name']; ?>
+                            </span>
+                            <span class="member-name-kana">
+                                <?php echo $nizisanziMember['channel_name_kana']; ?>
+                            </span>
                         </label>
                     <?php endforeach ?>
                 </div>
@@ -225,14 +237,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php
                             $isChecked = in_array($vspoMember['id'], $registeredMembers);
                             ?>
-                            <span class="group-name"><?php echo $vspoMember['group']; ?></span>
+                            <span class="group-name"><?php echo $vspoMember['member_group']; ?></span>
                             <input type="checkbox" name="selected_members[]" value="<?php echo $vspoMember['id']; ?>" <?php echo $isChecked ? 'checked' : ''; ?>>
                             <div class="img-container">
                                 <img src="<?php echo $vspoMember['img_url']; ?> "
                                     alt="<?php echo $vspoMember['channel_name']; ?>" draggable="false">
                             </div>
-                            <span class="member-name-vspo"
-                                data-kana="<?php echo $vspoMember['channel_name_kana']; ?>"><?php echo $vspoMember['channel_name']; ?></span>
+                            <span class="member-name-vspo"data-kana="<?php echo $vspoMember['channel_name_kana']; ?>">
+                                <?php echo $vspoMember['channel_name']; ?>
+                            </span>
+                            <span class="member-name-kana">
+                                <?php echo $vspoMember['channel_name_kana']; ?>
+                            </span>
                         </label>
                     <?php endforeach ?>
                 </div>
