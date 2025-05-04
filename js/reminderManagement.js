@@ -241,12 +241,12 @@ window.addEventListener('scroll', () => {
 });
 
 searchBox.addEventListener('input', () => {
-    const searchTerm = searchBox.value.trim();
+    const searchTerm = searchBox.value.trim().replace(/\s+/g, '');
 
     memberCards.forEach(card => {
 
         const memberHiraName = card.querySelector('span[data-kana]');
-        const memberName = memberHiraName.dataset.kana;
+        const memberName = memberHiraName.dataset.kana.replace(/\s+/g, '');
 
         if (memberName.includes(searchTerm) || wanakana.toKatakana(memberName).includes(searchTerm) || card.textContent.includes(searchTerm)) {
             card.style.display = '';
